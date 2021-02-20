@@ -1,0 +1,63 @@
+<h2 mat-dialog-title style="text-align: center;">Shipment Status</h2>
+<h3 mat-dialog-title style="text-align: center; color: #e9131c;"><b>{{ TrackNumber }}</b></h3>
+<hr>
+<div mat-dialog-content style="width: 650px;"> 
+  <b>Origin Country - <b style="color: #e9131c;">{{FromCountry}}</b></b>
+  <br><br>
+  
+  <ul *ngFor="let status of ShipmentStatus">
+    <li *ngIf="status.IsCurrent == 1 else ElseBlk"><span style="color: #e9131c;">&#10003; {{status.Date}} | {{status.Time}} | {{status.Status}}</span>  <a style="background-color: yellow;" *ngIf="status.Url != 'NIL'" href="{{status.Url}}" target="_blank"> | Go live Location</a></li>
+    <ng-template #ElseBlk>
+      <li>{{status.Date}} | {{status.Time}} | {{status.Status}}  </li>
+    </ng-template>
+ </ul>
+
+  <b>Destination Country - <b style="color: #e9131c;">{{ToCountry}}</b></b>
+  <br><br>
+  <hr>
+  <div class="row"> 
+    <div class="col-6">
+      <h3 style="color: #e9131c;">Sender Details</h3>
+      <table>
+          <tr>
+            <th>Name</th>
+            <td>{{ Sender.Name }}</td>
+          </tr>
+          <tr>
+            <th>Cell</th>
+            <td>{{ Sender.Cell }}</td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{ Sender.Email }}</td>
+          </tr>
+          <tr>
+            <th>Address</th>
+            <td>{{ Sender.Address }}</td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-6">
+      <h3 style="color: #e9131c;">Receiver Details</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <td>{{ Receiver.Name }}</td>
+        </tr>
+        <tr>
+          <th>Cell</th>
+          <td>{{ Receiver.Cell }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ Receiver.Email }}</td>
+        </tr>
+        <tr>
+          <th>Address</th>
+          <td>{{ Receiver.Address }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>

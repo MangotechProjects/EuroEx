@@ -1,0 +1,219 @@
+<!-- Pricing Start -->
+<section class="section bg-light" id="pricing">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <!-- <div class="text-center mb-5">
+          <h3 class="title mb-3">Choose Your Plan</h3>
+          <p class="text-muted font-size-15">Et harum quidem rerum facilis est et expedita distinctio nam libero
+            tempore cum soluta nobis eligendi cumque.</p>
+        </div> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="pricing-box rounded text-center p-4">
+          <div class="pricing-icon-bg my-4">
+            <i class="mdi mdi-account h1"></i>
+          </div>
+          <h6 class="title mb-3">{{ 'HOME.GETAQUICKSHIPPINGRATE' | translate }}</h6>
+          <p style="font-size: 12px;">{{ 'HOME.GETAQUICKSHIPPINGRATETEXT' | translate }}</p>
+          <div class="form-group">
+            <!-- <label for="exampleInputUsername">From*</label> -->
+            <input type="text" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.FROMCOUNTRY' | translate }}">
+          </div>
+          <div class="form-group">
+            <!-- <label for="exampleInputUsername">To*</label> -->
+            <input type="text" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.TOCOUNTRY' | translate }}">
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputUsername">Weight*</label>
+                <input type="text" class="form-control" id="exampleInputUsername" placeholder="Weight">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputUsername">Unit*</label>
+                <input type="text" class="form-control" id="exampleInputUsername" placeholder="Unit">
+              </div>
+            </div>
+          </div> -->
+          <div class="form-group">
+            <!-- <label for="exampleInputUsername">To*</label> -->
+            <input type="text" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.WEIGHT' | translate }}">
+          </div>
+          <div class="form-group">
+            <!-- <label for="exampleInputUsername">To*</label> -->
+            <input type="text" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.UNIT' | translate }}">
+          </div>
+          <a href="javascript: void(0);" class="btn btn-outline-primary">{{ 'HOME.CHECKRATES' | translate }}</a>
+          <div class="mt-4">
+            <div class="hero-bottom-img">
+              <img src="assets/images/pricing-bottom-bg.png" alt="" class="img-fluid d-block mx-auto">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="pricing-box rounded text-center active p-4">
+          <div class="pricing-icon-bg my-4">
+            <i class="mdi mdi-account-multiple h1"></i>
+          </div>
+          <h6 class="title mb-3">{{ 'HOME.MANAGESHIPMENTS' | translate }}</h6>
+          <p style="font-size: 12px;">{{ 'HOME.MANAGESHIPMENTSTEXT' | translate }}</p>
+          <hr>
+          <!-- <a href="/add-shipment"><p>Create Shipment</p></a> -->
+          <a href="javascript: void(0);" (click)="addShipAuth()"><p>{{ 'HOME.CREATESHIPMENT' | translate }}</p></a>
+          <hr>
+            <a href="javascript: void(0);" (click)="myShipAuth()"><p>{{ 'HOME.MYSHIPMENT' | translate }}</p></a>
+          <hr>
+          <a href="#"><p>{{ 'HOME.TRACKSHIPMENT' | translate }}</p></a>
+          <hr>
+          <a href="javascript: void(0);" class="btn btn-primary" (click)="loginModal(content)">{{ 'HOME.SIGNIN' | translate }}</a> 
+          <div class="mt-4">
+            <div class="hero-bottom-img">
+              <img src="assets/images/pricing-bottom-bg.png" alt="" class="img-fluid d-block mx-auto">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="pricing-box rounded text-center p-4">
+          <div class="pricing-icon-bg my-4">
+            <i class="mdi mdi-account-group h1"></i>
+          </div>
+          <h6 class="title mb-3">{{ 'HOME.FINDOFFICE' | translate }}</h6>
+          <p style="font-size: 12px;">{{ 'HOME.FINDOFFICETEXT' | translate }}</p>
+            <img src="assets/images/maps/bahrain-map.png" alt="" width="100%" height="200px"/>
+            <br><br>
+          <a href="javascript: void(0);" class="btn btn-outline-primary">{{ 'HOME.FINDNEARESTLOCATION' | translate }}</a>
+          <div class="mt-4">
+            <div class="hero-bottom-img">
+              <img src="assets/images/pricing-bottom-bg.png" alt="" class="img-fluid d-block mx-auto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="text-center">
+      <h3 class="title mb-4">
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+      </h3> 
+      <h4 class="text-uppercase text-primary"><b>{{ 'HOME.LOGIN' | translate }}</b></h4>
+    </div>
+    <div class="login-form mt-4">
+      <form [formGroup]="user_login" (ngSubmit)="loginform()">
+        <div class="form-group">
+          <label for="exampleInputUsername">{{ 'HOME.USERNAME' | translate }}</label>
+          <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.USERNAMEPLACEHOLDER' | translate }}" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">{{ 'HOME.PASSWORD' | translate }}</label>
+          <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="{{ 'HOME.PASSWORDPLACEHOLDER' | translate }}" required>
+        </div>
+        <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
+        <div class="custom-control custom-checkbox">
+          <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
+          <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
+        </div>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary">{{ 'HOME.LOGIN' | translate }} <i-feather class="icon-size-15 icon ml-1"
+              name="arrow-right-circle"></i-feather></button>
+        </div>
+      </form>
+      <!-- <div class="position-relative text-center mt-4">
+        <span class="login-border"></span>
+        <p class="social-login text-muted font-size-17">Social Login</p>
+      </div> -->
+      <div class="text-center">
+        <!-- <ul class="list-inline mt-2 mb-3">
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+              <i-feather class="icon-xs" name="facebook"></i-feather>
+            </a></li>
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+              <i-feather class="icon-xs" name="twitter"></i-feather>
+            </a></li>
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+              <i-feather class="icon-xs" name="instagram"></i-feather>
+            </a></li>
+          <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+              <i-feather class="icon-xs" name="linkedin"></i-feather>
+            </a></li>
+        </ul> -->
+        <p class="text-muted mb-0">{{ 'HOME.NEWUSER' | translate }} <a href="javascript: void(0);" class="text-primary" (click)="registerModal(registercontent)">{{ 'HOME.SIGNUP' | translate }}</a></p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #registercontent let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="text-center">
+      <h3 class="title mb-4">
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+      </h3>
+      <h4 class="text-uppercase text-primary"><b>{{ 'HOME.REGISTER' | translate }}</b></h4>
+    </div>
+    <div class="login-form mt-4">
+      <form [formGroup]="user_register" (ngSubmit)="registerform()">
+        <div class="form-group">
+          <label for="exampleInputUsername">{{ 'HOME.USERNAME' | translate }}</label>
+          <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.USERNAMEPLACEHOLDER' | translate }}" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">{{ 'HOME.EMAIL' | translate }}</label>
+          <input type="email" formControlName="email" class="form-control" id="exampleInputEmail2" placeholder="Youremail@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">{{ 'HOME.CELL' | translate }}</label>
+          <input type="tel" formControlName="cell"  class="form-control" id="exampleInputEmail2" placeholder="{{ 'HOME.CELL' | translate }}" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword2">{{ 'HOME.PASSWORD' | translate }}</label>
+          <input type="password" formControlName="password"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.PASSWORD' | translate }}" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword2">{{ 'HOME.CONFIRMPASSWORD' | translate }}</label>
+          <input type="password" formControlName="cpassword"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
+        </div>
+        <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
+        <div class="custom-control custom-checkbox">
+          <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
+          <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
+        </div>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary">{{ 'HOME.REGISTER' | translate }} <i-feather class="icon-size-15 icon ml-1"
+              name="arrow-right-circle"></i-feather></button>
+        </div>
+      </form>
+      <!-- <div class="position-relative text-center mt-4">
+        <span class="login-border"></span>
+        <p class="social-login text-muted font-size-17">Social Login</p>
+      </div> -->
+      <div class="text-center">
+        <!-- <ul class="list-inline mt-2 mb-3">
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+              <i-feather class="icon-xs" name="facebook"></i-feather>
+            </a></li>
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+              <i-feather class="icon-xs" name="twitter"></i-feather>
+            </a></li>
+          <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+              <i-feather class="icon-xs" name="instagram"></i-feather>
+            </a></li>
+          <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+              <i-feather class="icon-xs" name="linkedin"></i-feather>
+            </a>
+          </li>
+        </ul> -->
+        <p class="text-muted mb-0">{{ 'HOME.ALREDYHAVEANACCOUNT' | translate }} <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">{{ 'HOME.SIGNIN' | translate }}</a></p>
+      </div>
+    </div>
+  </div>
+</ng-template>

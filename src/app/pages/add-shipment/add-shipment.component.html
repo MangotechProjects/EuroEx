@@ -1,0 +1,1304 @@
+  <!--Navbar Start-->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-light sticky sticky-dark nav-sticky"
+    > <!-- removed id="navbar"-->
+    <div class="container">
+      <!-- LOGO -->
+      <a class="navbar-brand logo" href="/">
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-light" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" >
+        <i class="mdi mdi-menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mx-auto navbar-center" id="mySidenav">
+          <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#home'" class="nav-link" (click)="home()">Home</a>
+          </li>
+          <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#features'" class="nav-link"
+              [ngxScrollToOffset]="5" (click)="about()">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="javascript: void(0);"  class="nav-link">Ship</a>
+            <div class="dropdown-content">
+              <a href="javascript: void(0);" class="nav-link" (click)="addShipAuth()">Create Shipment</a>
+              <a href="javascript: void(0);" class="nav-link" (click)="myShipAuth()">My Shipments</a>
+            </div>
+          </li>
+          <li class="nav-item" >
+            <a href="javascript: void(0);" class="nav-link" (click)="solutionService()">Solutions & Services</a>
+          </li>
+          <!-- <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#contact'" class="nav-link" [ngxScrollToOffset]="5">Contact
+              Us</a>
+          </li>  -->
+        </ul>
+        <div *ngIf="isLocalSotrageToken!=null;  else ElseBlock">
+          <ul class="navbar-nav navbar-center">
+            <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="logout()">Log
+                out</a>
+            </li>
+          </ul>
+        </div>
+        <ng-template #ElseBlock>
+          <ul class="navbar-nav navbar-center">
+            <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="loginModal(content)">Signin / Signup</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="registerModal(registercontent)">Register</a>
+            </li> -->
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+  <br><br><br>
+  <br><br><br>
+  <div appScrollspy [spiedTags]="['SECTION']" (sectionChange)="onSectionChange($event)">
+    <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+
+        <!-- HEADER -->
+        <div class="header accent p-24 h-80" fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <!-- <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="secondary-text s-18">home</mat-icon>
+                    <mat-icon class="secondary-text s-16">chevron_right</mat-icon>
+                    <span class="secondary-text">Shipment</span>
+                </div> -->
+                <div class="h3 mt-10" style="text-align: center;">Add Shipment</div>
+            </div>
+        </div>
+        <!-- / HEADER -->
+    
+        <!-- CONTENT -->
+        <div class="content p-24">
+     
+    
+    
+            <div class="horizontal-stepper-wrapper">
+    
+                <!-- HORIZONTAL STEPPER EXAMPLE -->
+                <mat-horizontal-stepper class="mat-elevation-z4" [linear]="true">
+    
+                    <!-- <mat-step [stepControl]="horizontalStepperStepAccountConfirmation">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStepAccountConfirmation">
+    
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="row" class="AccountSelection">
+    
+    
+                                <mat-label>New Account</mat-label>&nbsp;&nbsp;&nbsp;
+                                <input id="Account" formControlName="Account" type="radio" value="1"
+                                    (change)="GetChkBoxValue()">
+    
+                                &nbsp;&nbsp;&nbsp;
+                                <mat-label>Existing Account</mat-label>&nbsp;&nbsp;&nbsp;
+                                <input id="Account" formControlName="Account" type="radio" value="2"
+                                    (change)="GetChkBoxValue()">
+    
+    
+    
+    
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step> -->
+    
+                    <mat-step [stepControl]="horizontalStepperStepSenderDetails">
+                        
+                        <form fxLayout="column" [formGroup]="horizontalStepperStepSenderDetails">
+                            <h3 style="font-weight:bolder;">Sender Section</h3>
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="column">
+    
+    
+                                <!-- <div *ngIf="IsNewSender else elseSenderBlock" fxLayout="row" fxLayoutAlign="start center"
+                                    fxFlex="1 0 auto">
+    
+                                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                                        <mat-label>First name</mat-label>
+                                        <input matInput formControlName="SenderFirstName">
+                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                                        <mat-error>First Name is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput formControlName="SenderLastName">
+                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                                        <mat-error>Last Name is required!</mat-error>
+                                    </mat-form-field>
+    
+                                </div> -->
+                                <!-- <ng-template #elseSenderBlock> -->
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 100%;">
+                                        <mat-label>Sender</mat-label>
+                                        <mat-select id="ExistSenderDDID" formControlName="ExistSenderDDID"
+                                            [(ngModel)]="ExistSenderDDID" (ngModelChange)="GetSenderIDWise()"  disabled>
+                                            <mat-option *ngFor="let item of ExistSenderData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-select id="ExistSenderDDID" formControlName="ExistSenderDDID"
+                                            [(ngModel)]="ExistSenderDDID" (ngModelChange)="GetSenderIDWise()">
+                                            <mat-option value="2018" >
+                                                {{ isnumber }}
+                                            </mat-option>
+                                        </mat-select> -->
+                                        <mat-error>Sender is required!</mat-error>
+                                    </mat-form-field>
+                                <!-- </ng-template> -->
+    
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                                    <!-- <mat-form-field appearance="outline" fxFlex="30" class="pr-4">
+                                        <mat-label>Code</mat-label>
+                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderPhoneCodeDDID" formControlName="SenderPhoneCodeDDID"
+                                            [(ngModel)]="SenderPhoneCodeDDID" >
+                                            <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Code is required!</mat-error>
+                                    </mat-form-field> -->
+
+                                    <mat-form-field appearance="outline"  appearance="outline" fxFlex="30" class="pr-4"  style="width: 25%;">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput #SenderEmail 
+                                               formControlName="SenderEmail"  required>
+                                        <mat-error>Email is required!</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline"  appearance="outline" fxFlex="30" class="pr-4"  style="width: 25%;">
+                                        <mat-label>Phone #</mat-label>
+                                        <input matInput #SenderPhone 
+                                               formControlName="SenderPhone" maxlength="11" required>
+                                        <mat-error>Phone # is required!</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline"  appearance="outline" fxFlex="30" class="pr-4" style="width: 50%;">
+                                        <mat-label>Address</mat-label>
+                                        <input matInput formControlName="SenderAddress" placeholder="Flat/Office/House/Road/Street/Block/Area" placeholder="Flat/Office/House/Road/Street/Block/Area" required>
+                                        <mat-error>Address is required!</mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput #SenderEmail 
+                                               formControlName="SenderEmail"  required>
+                                        <mat-error>Email is required!</mat-error>
+                                    </mat-form-field>
+                
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Address</mat-label>
+                                        <textarea matInput formControlName="SenderAddress" placeholder="Flat/Office/House/Road/Street/Block/Area" placeholder="Flat/Office/House/Road/Street/Block/Area" required>
+                                            
+                                        </textarea>
+                                        <mat-error>Address is required!</mat-error>
+                                    </mat-form-field>
+                                </div> -->
+
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Code</mat-label>
+                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderPhoneCodeDDID" formControlName="SenderPhoneCodeDDID"
+                                            [(ngModel)]="SenderPhoneCodeDDID" >
+                                            <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Code is required!</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Country</mat-label>
+                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderCountryDDID" formControlName="SenderCountryDDID"
+                                            [(ngModel)]="SenderCountryDDID" >
+                                            <!-- <mat-option value="default">Select Type</mat-option> -->
+                                            <mat-option *ngFor="let item of CountryData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Country is required!</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>City</mat-label>
+                                        <input matInput formControlName="SenderCity" required>
+                                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                        <mat-error>City is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    <!-- <mat-form-field appearance="outline" fxFlex="34" class="px-8">
+                                        <mat-label>Country</mat-label>
+                                        <input matInput formControlName="SenderCountry" required>
+                                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                        <mat-error>Country is required!</mat-error>
+                                    </mat-form-field> -->
+    
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Postal Code</mat-label>
+                                        <input matInput #SenderPostalCode value="94043" formControlName="SenderPostalCode"
+                                            placeholder="Postal/PO Box"  required>
+                                        <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
+                                        <!-- <mat-hint align="end">{{SenderPostalCode.value.length}} / 5</mat-hint> -->
+                                        <mat-error>Postal Code is required!</mat-error>
+                                    </mat-form-field>
+    
+                                </div>
+                                <!-- <div *ngIf="IsNewSender" fxLayout="row" fxLayoutAlign="center center">
+                                    <button class="mr-8" mat-raised-button style="margin-bottom: 15px;" type="button"
+                                    style="background-color: #e9141b; color: white;" (click)="SaveNewSender()">
+                                        Submit
+                                    </button>
+                                </div> -->
+    
+    
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <!-- <button *ngIf = "IsNewSender else elseNewSenderSaveBtnBlock" mat-raised-button matStepperNext  type="button" color="accent">
+                                    Save & Next
+                                </button> -->
+                                <!-- <ng-template #elseNewSenderSaveBtnBlock> -->
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;" id="SenderStepperBtn">
+                                    Next
+                                </button>
+                                <!-- </ng-template> -->
+    
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step [stepControl]="horizontalStepperStepReceiverDetails">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStepReceiverDetails">
+                            <h3 style="font-weight:bolder;">Receiver Section</h3>
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="column">
+                                <!-- <div *ngIf="IsNewReceiver else elseReceiverBlock" fxLayout="row"
+                                    fxLayoutAlign="start center" fxFlex="1 0 auto"> -->
+    
+                                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
+                                        <mat-label>First name</mat-label>
+                                        <input matInput formControlName="ReceiverFirstName">
+                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                                        <mat-error>First Name is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput formControlName="ReceiverLastName">
+                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                                        <mat-error>Last Name is required!</mat-error>
+                                    </mat-form-field>
+    
+                                <!-- </div> -->
+                                <!-- <ng-template #elseReceiverBlock>
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 100%;">
+                                        <mat-label>Receiver</mat-label>
+                                        <mat-select  id="ExistReceiverDDID" formControlName="ExistReceiverDDID"
+                                            [(ngModel)]="ExistReceiverDDID" (ngModelChange)="GetReceiverIDWise()">
+                                            
+                                            <mat-option *ngFor="let item of ExistReceiverData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Receiver is required!</mat-error>
+                                    </mat-form-field>
+                                </ng-template> -->
+    
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                                
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4"  style="width: 25%;">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput #email 
+                                               formControlName="ReceiverEmail"  required>
+                                        <mat-error>Email is required!</mat-error>
+                                    </mat-form-field>
+                
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4"  style="width: 25%;">
+                                        <mat-label>Phone #</mat-label>
+                                        <input matInput #phone 
+                                               formControlName="ReceiverPhone" maxlength="11" required>
+                                        <mat-error>Phone # is required!</mat-error>
+                                    </mat-form-field>
+                                    
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4"  style="width: 50%;">
+                                        <mat-label>Address</mat-label>
+                                        <input matInput formControlName="ReceiverAddress" placeholder="Flat/Office/House/Road/Street/Block/Area" placeholder="Flat/Office/House/Road/Street/Block/Area" required>
+                                        <mat-error>Address is required!</mat-error>
+                                    </mat-form-field>
+                                 
+                                </div>
+
+                                <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput #email 
+                                               formControlName="ReceiverEmail"  required>
+                                        <mat-error>Email is required!</mat-error>
+                                    </mat-form-field>
+                
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                
+                                    <mat-form-field appearance="outline" fxFlex="100">
+                                        <mat-label>Address</mat-label>
+                                        <textarea matInput formControlName="ReceiverAddress" placeholder="Flat/Office/House/Road/Street/Block/Area" placeholder="Flat/Office/House/Road/Street/Block/Area" required>
+                                            
+                                        </textarea>
+                                        <mat-error>Address is required!</mat-error>
+                                    </mat-form-field>
+                                </div> -->
+    
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                                    <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
+                                        <mat-label>Code</mat-label>
+                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="ReceiverPhoneCodeDDID" formControlName="ReceiverPhoneCodeDDID"
+                                            [(ngModel)]="ReceiverPhoneCodeDDID" >
+                                            <!-- <mat-option value="default">Select Type</mat-option> -->
+                                            <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Code is required!</mat-error>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
+                                        <mat-label>Country</mat-label>
+                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="ReceiverCountryDDID" formControlName="ReceiverCountryDDID"
+                                            [(ngModel)]="ReceiverCountryDDID" >
+                                            <!-- <mat-option value="default">Select Type</mat-option> -->
+    
+    
+                                            <mat-option *ngFor="let item of CountryData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Country is required!</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
+                                        <mat-label>City</mat-label>
+                                        <input matInput formControlName="ReceiverCity" required>
+                                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                        <mat-error>City is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    <!-- <mat-form-field appearance="outline" fxFlex="34" class="px-8">
+                                        <mat-label>Country</mat-label>
+                                        <input matInput formControlName="ReceiverCountry" required>
+                                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                        <mat-error>Country is required!</mat-error>
+                                    </mat-form-field> -->
+                                   
+    
+                                    <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
+                                        <mat-label>Postal Code</mat-label>
+                                        <input matInput #postalCode value="94043" formControlName="ReceiverPostalCode"
+                                        placeholder="Postal/PO Box" maxlength="5" required>
+                                        <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
+                                        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                                        <mat-error>Postal Code is required!</mat-error>
+                                    </mat-form-field>
+    
+                                </div>
+                                <div *ngIf="IsNewSender" fxLayout="row" fxLayoutAlign="center center">
+                                    <button class="mr-8" mat-raised-button style="margin-bottom: 15px;" type="button"
+                                    style="background-color: #e9141b; color: white;" (click)="SaveNewReceiver()">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <!-- <button *ngIf = "IsNewReceiver else elseNewReceiverSaveBtnBlock" mat-raised-button matStepperNext (click)= "SaveNewReceiver()" type="button" color="accent">
+                                    Save & Next
+                                </button>
+                                <ng-template #elseNewReceiverSaveBtnBlock>
+                                    <button mat-raised-button matStepperNext type="button" color="accent" >
+                                        Save
+                                    </button>
+                                </ng-template> -->
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;"
+                                    id="ReceiverStepperBtn" (click)="SetSender_ReceiverID()">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <!--Game Begin-->
+    
+    
+                    <mat-step [stepControl]="horizontalStepperStep1">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep1">
+                            <h3 style="font-weight:bolder;">Shipment Type</h3>
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="column">
+    
+                                <mat-form-field appearance="outline" fxFlex="30" class="pr-4">
+                                    <mat-label>Shipment Type</mat-label>
+                                    <mat-select id="shipmentTypeDDID" formControlName="shipmentTypeDDID"
+                                        [(ngModel)]="shipmentTypeDDID" >
+                                        <!-- <mat-option value="default">Select Type</mat-option> -->
+                                        <mat-option *ngFor="let item of ShipmentTypeData" [value]="item.Value">{{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Shipment Type is required!</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" fxFlex="30" class="pr-4">
+                                    <mat-label>Cargo Type</mat-label>
+                                    <mat-select id="CargoTypeDDID" formControlName="CargoTypeDDID"
+                                        [(ngModel)]="CargoTypeDDID" >
+                                        <!-- <mat-option value="default">Select Type</mat-option> -->
+                                        <mat-option *ngFor="let item of CargoTypeData" [value]="item.Value">{{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Cargo Type is required!</mat-error>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="outline" fxFlex="30" class="pr-4">
+                                    <mat-label>Unit</mat-label>
+                                    <mat-select id="UnitDDID" formControlName="UnitDDID"
+                                        [(ngModel)]="UnitDDID" (ngModelChange)="getRatesID()">
+                                        <!-- <mat-option value="default">Select Type</mat-option> -->
+                                        <mat-option *ngFor="let item of UnitData" [value]="item.Value">{{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Unit is required!</mat-error>
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="outline" fxFlex="10">
+                                    <mat-label>Rate/KG</mat-label>
+                                    <input matInput id="perKGRate" value="0.00" disabled>
+    
+                                </mat-form-field>
+                                &nbsp;&nbsp;&nbsp;
+                                <!-- <mat-form-field appearance="outline" fxFlex="30" class="pr-4" id="senderDD">
+                                    <mat-label>Sender</mat-label>
+                                    <mat-select formControlName="senderDD" [(ngModel)]="senderDD">
+                                        
+                                        <mat-option *ngFor="let item of SenderData" [value]="item.Value">{{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Sender is required!</mat-error>
+                                </mat-form-field>
+    
+    
+                                <mat-form-field appearance="outline" fxFlex="30" class="pr-4" id="receiverDD">
+                                    <mat-label>Receiver</mat-label>
+                                    <mat-select formControlName="receiverDD" [(ngModel)]="receiverDD">
+                                        
+                                        <mat-option *ngFor="let item of ReceiverData" [value]="item.Value">{{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Receiver is required!</mat-error>
+                                </mat-form-field> -->
+    
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step [stepControl]="horizontalStepperStep2">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep2">
+                            <h3 style="font-weight:bolder;">Shipment Category</h3>
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="column">
+    
+    
+    
+    
+                                <div  *ngIf="isDocument else ParcelBlock">
+    
+                                    <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                                        <mat-label>Document Type*</mat-label>
+                                        <mat-select id="documentTypeDDID" formControlName="documentTypeDDID"
+                                            [(ngModel)]="documentTypeDDID">
+    
+                                            <mat-option *ngFor="let item of DocumentTypeData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Document Type is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    &nbsp;&nbsp;&nbsp;
+
+                                    &nbsp;&nbsp;&nbsp;
+                                    <mat-form-field appearance="outline" fxFlex="12" class="pr-4">
+                                        <mat-label>Weight(KG)</mat-label>
+                                        <input matInput type="number" formControlName="docWeight" maxlength="6"
+                                            [(ngModel)]="docWeight" required>
+                                        <!-- <mat-icon matSuffix class="secondary-text">account_circle</mat-icon> -->
+                                        <mat-error> Weight is required!</mat-error>
+                                    </mat-form-field>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button mat-raised-button type="button" class="add-button"
+                                        (click)="funcDocData()" style="background-color: #e9141b; color: white;">
+                                        +
+                                    </button>
+                                    
+                                </div>
+    
+                                <ng-template #ParcelBlock>
+    
+    
+                                    <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                                        <mat-label>Parcel Type*</mat-label>
+                                        <mat-select id="parcelTypeDDID" formControlName="parcelTypeDDID"
+                                            [(ngModel)]="parcelTypeDDID">
+                                            <mat-option value="default">Select Type</mat-option>
+                                            <mat-option *ngFor="let item of ParcelTypeData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Parcel Type is required!</mat-error>
+                                    </mat-form-field>
+    
+                                    &nbsp;&nbsp;&nbsp;
+    
+                                    <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                                        <mat-label>Parcel Category*</mat-label>
+                                        <mat-select id="parcelCategoryDDID" formControlName="parcelCategoryDDID"
+                                            [(ngModel)]="parcelCategoryDDID">
+                                            <mat-option value="default">Select Type</mat-option>
+                                            <mat-option *ngFor="let item of ParcelCategoryData" [value]="item.Value">
+                                                {{item.Name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>Parcel Category is required!</mat-error>
+                                    </mat-form-field>
+    
+    
+                                    &nbsp;&nbsp;&nbsp;
+                                    <mat-form-field appearance="outline" fxFlex="14" class="pr-4">
+                                        <mat-label>Net Wgt.(KG)</mat-label>
+                                        <input matInput type="number" id="parcelNetWeight" [(ngModel)]="parcelNetWeight"
+                                            formControlName="parcelNetWeight" maxlength="4" required>
+                                        <!-- <mat-icon matSuffix class="secondary-text">account_circle</mat-icon> -->
+                                        <mat-error> Net Weight is required!</mat-error>
+                                    </mat-form-field>
+                                    &nbsp;&nbsp;&nbsp;
+    
+                                    <mat-form-field appearance="outline" fxFlex="15" class="pr-4">
+                                        <mat-label>Gross Wgt.(KG) </mat-label>
+                                        <input matInput type="number" id="parcelGrossWeight" [(ngModel)]="parcelGrossWeight"
+                                            formControlName="parcelGrossWeight" maxlength="4" required>
+                                        <!-- <mat-icon matSuffix class="secondary-text">account_circle</mat-icon> -->
+                                        <mat-error> Gross Weight is required!</mat-error>
+                                    </mat-form-field>
+                                    &nbsp;&nbsp;&nbsp;
+    
+                                    <button mat-raised-button type="button" class="add-button" (click)="funcParcelData()"
+                                    style="background-color: #e9141b; color: white;">
+                                        +
+                                    </button>
+    
+    
+                                </ng-template>
+    
+    
+                                <mat-label><strong></strong></mat-label>
+    
+                                <table id="itemTable" class="itemTable">
+                                    <thead *ngIf="isDocument else tblHeaderElseBlock">
+                                        <tr style="text-align: center;">
+                                            <th>Shipment Type</th>
+                                            <th>Document Type</th>
+                                            <th>Short Info.</th>
+                                            <th>Quantity</th>
+                                            <th>Length/Width/Height</th>
+                                            <th>Weight</th>
+                                            <th>Total Cost</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <ng-template #tblHeaderElseBlock>
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th>Shipment Type</th>
+                                                <th>Parcel Type</th>
+                                                <th>Parcel Category</th>
+                                                <th>Short Info.</th>
+                                                <th>Comodity Code</th>
+                                                <th>Quantity</th>
+                                                <th>Unit</th>
+                                                <th>Length/Width/Height</th>
+                                                <th>Gross Weight</th>
+                                                <th>Net Weight</th>
+                                                <th>Total Cost</th>
+                                                <th>Action</th>
+    
+                                            </tr>
+                                        </thead>
+                                    </ng-template>
+    
+                                    <tbody *ngIf="isDocument else tblBodyElseBlock">
+                                        <tr *ngFor="let item of appendDocData" id="{{item[0].rowID}}">
+    
+                                            <td> <input hidden id="shipmentTypeTableID"
+                                                    value="{{item[0].shipmentTypeID}}">{{item[0].shipmentTypeName}} </td>
+                                            <td> <input hidden id="docTypeTableID"
+                                                    value="{{item[0].DocTypeID}}">{{item[0].DocTypeName}} </td>
+    
+                                            <td id="docDescTable" contenteditable="true">{{item[0].docDesc}}</td>
+                                            <td id="docQtyTable" contenteditable="true">{{item[0].docQty}}</td>
+                                            <td id="docDimensionTable" contenteditable="true">{{item[0].docDimension}}</td>
+                                            <td id="docWeightTable">{{item[0].docWeight}}</td>
+                                            <td id="docTotalAmountTable">{{item[0].perKiloGramRate}}</td>
+
+                                            <td id="rowID"><button (click)="removeDoc(item[0].rowID)">x</button></td>    
+                                        </tr>
+    
+                                    </tbody>
+                                    <ng-template #tblBodyElseBlock>
+                                        <tbody>
+                                            <tr *ngFor="let item of appendParcelData" id= "{{item[0].rowID}}">
+    
+                                                <td> <input hidden id="shipmentTypeTableID"
+                                                        value="{{item[0].shipmentTypeID}}">{{item[0].shipmentTypeName}}
+                                                </td>
+                                                <td> <input hidden id="parcelTypeTableID"
+                                                        value="{{item[0].ParcelTypeID}}">{{item[0].ParcelTypeName}} </td>
+                                                <td> <input hidden id="parcelCategoryTableID"
+                                                        value="{{item[0].ParcelCategoryID}}">{{item[0].ParcelCategoryName}}
+                                                </td>
+    
+                                                <td id="parcelDescTable" contenteditable="true">{{item[0].parcelDesc}}</td>
+                                                <td id="parcelComodityTable" contenteditable="true">
+                                                    {{item[0].parcelComodity}}</td>
+                                                <td id="parcelQtyTable" contenteditable="true">{{item[0].parcelQty}}</td>
+                                                <td id="parcelUnitTable" contenteditable="true">{{item[0].parcelUnit}}</td>
+    
+                                                <td id="parcelDimensionTable" contenteditable="true">
+                                                    {{item[0].parcelDimension}}</td>
+                                                <td id="parcelGrossWeightTable">{{item[0].parcelGrossWeight}}</td>
+                                                <td id="parcelNetWeightTable">{{item[0].parcelNetWeight}}</td>
+                                                <td id="parcelTotalAmountTable">{{item[0].perKiloGramRate}}</td>
+                                                
+                                                <td id="rowID"><button (click)="removeParcel(item[0].rowID)">x</button></td>
+    
+    
+                                            </tr>
+    
+                                        </tbody>
+                                    </ng-template>
+                                </table>
+    
+    
+    
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;" (click)="SetInfos()">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step [stepControl]="horizontalStepperStep3">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep3">
+                            <h3 style="font-weight:bolder;">Date & Time</h3>
+                            <ng-template matStepLabel></ng-template>
+                            
+                            <div fxFlex="1 0 auto" fxLayout="column">
+                                <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+    
+                                </div>
+                                <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                                    <mat-label>Packaging Type*</mat-label>
+                                    <mat-select id="packageTypeDDID" formControlName="packageTypeDDID"
+                                        [(ngModel)]="packageTypeDDID">
+                                        <mat-option value="default">Select Type</mat-option>
+                                        <mat-option *ngFor="let item of PackagingTypeData" [value]="item.Value">
+                                            {{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Packaging Type is required!</mat-error>
+                                </mat-form-field>
+    
+                                &nbsp;&nbsp;&nbsp;
+                                <mat-form-field appearance="outline" fxFlex="10" style="width: 250px;">
+                                    <mat-label>Pick Up Date</mat-label>
+                                    <input type="date" matInput id="PickUpDate" formControlName="PickUpDate"
+                                        [(ngModel)]="PickUpDate" [min]="SetMinDate" (change)="getPickUpDate()"  required>
+                                    <mat-error>Pick Up Date is required!</mat-error>
+                                </mat-form-field>
+                                <!-- &nbsp;&nbsp;&nbsp;
+                                <mat-form-field appearance="outline" fxFlex="10" style="width: 250px;">
+                                    <mat-label>Shipment Date</mat-label>
+                                    <input type="date" matInput id="ShipmentDate" formControlName="ShipmentDate"
+                                        [(ngModel)]="ShipmentDate" [min]="SetShipmentDate">
+                                    <mat-error>Shipment Date is required!</mat-error>
+                                </mat-form-field> -->
+                                &nbsp;&nbsp;&nbsp;
+                                <div fxFlex="1 0 auto" fxLayout="row">
+                                    <mat-label>Time Window</mat-label><br>
+                                    <mat-form-field appearance="outline" fxFlex="16">
+                                        <mat-label>From</mat-label>
+                                        <input type="time" matInput id="FromTime" formControlName="FromTime" required>
+                                        <mat-error>Time is required!</mat-error>
+                                    </mat-form-field>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <mat-form-field appearance="outline" fxFlex="16">
+                                        <mat-label>To</mat-label>
+                                        <input type="time" matInput id="ToTime" formControlName="ToTime" required>
+                                        <mat-error>Time is required!</mat-error>
+                                    </mat-form-field>
+    
+                                </div>
+                                <!-- &nbsp;&nbsp;&nbsp;
+                                <mat-form-field appearance="outline" fxFlex="10" style="width: 250px;">
+                                    <mat-label>Shipment Date</mat-label>
+                                    <input type="date" matInput id="ShipmentDate" formControlName="ShipmentDate"
+                                        [(ngModel)]="ShipmentDate" [min]="SetShipmentDate" required>
+                                    <mat-error>Shipment Date is required!</mat-error>
+                                </mat-form-field>
+                                &nbsp;&nbsp;&nbsp; -->
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+    
+    
+    
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;"
+                                    (click)="SetConfirmedTotalAmount()">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step [stepControl]="horizontalStepperStep4">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep4">
+                            <h3 style="font-weight:bolder;">Payment Section</h3>
+                            <ng-template matStepLabel></ng-template>
+    
+                            <div fxFlex="1 0 auto" fxLayout="column">
+    
+                                <mat-form-field appearance="outline" fxFlex="20" class="pr-4">
+                                    <mat-label>Payment Mode*</mat-label>
+                                    <mat-select id="PayModeDDID" formControlName="PayModeDDID" [(ngModel)]="PayModeDDID">
+    
+                                        <mat-option *ngFor="let item of PayModeData" [value]="item.Value">
+                                            {{item.Name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Payment Mode* is required!</mat-error>
+                                </mat-form-field>
+    
+                                &nbsp;&nbsp;&nbsp;
+                                <mat-form-field appearance="outline" fxFlex="10">
+                                    <mat-label>Total Amount</mat-label>
+                                    <input type="text" matInput id="ConfirmedTotalAmount" disabled>
+    
+                                </mat-form-field>
+                                &nbsp;&nbsp;&nbsp;
+    
+                            </div>
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+    
+    
+    
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <button mat-raised-button matStepperNext type="button" style="background-color: #e9141b; color: white;" (click) = "SummarizedData()">
+                                    Next
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step [stepControl]="horizontalStepperStep5">
+    
+                        <form fxLayout="column" [formGroup]="horizontalStepperStep5">
+                            <h3 style="font-weight:bolder;">Shipment Confirmation Section</h3>
+                            <ng-template matStepLabel></ng-template>
+                            <!-- <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                                Confirm Shipment?
+                            </div> -->
+    
+                            <div fxFlex="0 0 auto" fxLayout="row">
+                                <div fxFlex="1 0 auto" fxLayout="column">
+    
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Shipment Type</mat-label>
+                                        <input matInput id="DisShipmentType" value="0.00" disabled>
+    
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Packaging Type</mat-label>
+                                        <input matInput id="DisPackageType" value="0.00" disabled>
+    
+                                    </mat-form-field>
+
+                                    <!-- <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Shipment Date</mat-label>
+                                        <input matInput id="DisShipmentDate" value="0.00" disabled>
+                                    </mat-form-field> -->
+
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
+                                        <mat-label>Pick Up Date</mat-label>
+                                        <input matInput id="DisPickUpDate" value="0.00" disabled>
+                                    </mat-form-field>
+
+                                    <!-- <br><br><br>
+                                    <mat-form-field appearance="outline" fxFlex="10">
+                                        <mat-label>Total Units</mat-label>
+                                        <input matInput id="DisTotalUnit" value="0.00" disabled>
+    
+                                    </mat-form-field>
+                                    <br><br><br>
+                                    <mat-form-field appearance="outline" fxFlex="10">
+                                        <mat-label>Shipment Date</mat-label>
+                                        <input matInput id="DisShipmentDate" value="0.00" disabled>
+                                    </mat-form-field> -->
+       
+                                </div>
+                                <!-- &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -->
+    
+                                <div fxFlex="1 0 auto" fxLayout="column">
+                                    
+                                    <!-- <mat-form-field appearance="outline" fxFlex="10">
+                                        <mat-label>Packaging Type</mat-label>
+                                        <input matInput id="DisPackageType" value="0.00" disabled>
+    
+                                    </mat-form-field> -->
+
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Total Units</mat-label>
+                                        <input matInput id="DisTotalUnit" value="0.00" disabled>
+    
+                                    </mat-form-field>
+                                 
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Total Weight</mat-label>
+                                        <input matInput id="DisWeight" value="0.00" disabled>
+    
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Total Chargable Amount</mat-label>
+                                        <input matInput id="DisTotalAmount" value="0.00" disabled>
+    
+                                    </mat-form-field>
+ 
+                                    <!-- <mat-form-field appearance="outline" fxFlex="10">
+                                        <mat-label>Pick Up Date</mat-label>
+                                        <input matInput id="DisPickUpDate" value="0.00" disabled>
+                                    </mat-form-field> -->
+    
+    
+                                </div>
+    
+                                <!-- &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -->
+    
+                                <div fxFlex="1 0 auto" fxLayout="column">
+                                    
+
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Cargo Type</mat-label>
+                                        <input matInput id="DisCargoType" value="0.00" disabled>
+    
+                                    </mat-form-field>
+    
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Payment Mode</mat-label>
+                                        <input matInput id="DisPayMode" value="0.00" disabled>
+    
+                                    </mat-form-field>
+                                    <!-- <br><br><br> -->
+                                    <!-- <mat-form-field appearance="outline" fxFlex="10">
+                                        <mat-label>Total Chargable Amount</mat-label>
+                                        <input matInput id="DisTotalAmount" value="0.00" disabled>
+    
+                                    </mat-form-field> -->
+                                    <!-- <br><br><br> -->
+                                    <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 33.3%;">
+                                        <mat-label>Time Window</mat-label>
+                                        <input matInput id="DisTimeSpan" value="0.00" disabled>
+    
+                                    </mat-form-field>
+    
+    
+                                </div>
+    
+    
+                            </div>
+    
+    
+                            <div fxLayout="row" fxLayoutAlign="center center">
+    
+    
+    
+                                <button class="mr-8" mat-raised-button matStepperPrevious type="button" style="background-color: #e9141b; color: white;">
+                                    Previous
+                                </button>
+                                &nbsp;&nbsp;
+                                <button mat-raised-button matStepperNext type="button" (click)="submitShipment()"
+                                style="background-color: #e9141b; color: white;">
+                                    Confirm
+                                </button>
+                            </div>
+    
+                        </form>
+    
+                    </mat-step>
+    
+                    <mat-step>
+    
+                        <ng-template matStepLabel></ng-template>
+    
+                        <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                            Thank your for your time.
+                        </div>
+    
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <!-- <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                        Previous
+                    </button> -->
+                            <!-- <button mat-raised-button type="button" style="background-color: #e9141b; color: white;" (click)="finishHorizontalStepper()">
+                                Finish
+                            </button> -->
+                        </div>
+    
+                    </mat-step>
+    
+                </mat-horizontal-stepper>
+                <!-- / HORIZONTAL STEPPER EXAMPLE -->
+    
+            </div>
+    
+            <!--Region Stepper-->
+    
+    
+        </div>
+        <!-- / CONTENT -->
+    
+    </div>
+  </div>
+  <br><br>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Login</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_login" (ngSubmit)="loginform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+          </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Login <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a></li>
+          </ul> -->
+          <p class="text-muted mb-0">New User? <a href="javascript: void(0);" class="text-primary" (click)="registerModal(registercontent)">Signup</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #registercontent let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Register</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_register" (ngSubmit)="registerform()">
+            <div class="form-group">
+                <label for="exampleInputEmail2">{{ 'HOME.EMAIL' | translate }}</label>
+                <input type="text" formControlName="email" class="form-control" id="exampleInputEmail2" placeholder="{{ 'HOME.EMAILPLACEHOLDER' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername">{{ 'HOME.USERNAME' | translate }}</label>
+                <input type="email" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.USERNAMEPLACEHOLDER' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail2">{{ 'HOME.CELL' | translate }}</label>
+                <input type="tel" formControlName="cell"  class="form-control" id="exampleInputEmail2" placeholder="{{ 'HOME.CELL' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword2">{{ 'HOME.PASSWORD' | translate }}</label>
+                <input type="password" formControlName="password"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.PASSWORD' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword2">{{ 'HOME.CONFIRMPASSWORD' | translate }}</label>
+                <input type="password" formControlName="cpassword"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
+              </div>
+              <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
+              <div class="custom-control custom-checkbox">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
+              </div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">{{ 'HOME.REGISTER' | translate }} <i-feather class="icon-size-15 icon ml-1"
+                    name="arrow-right-circle"></i-feather></button>
+              </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a>
+            </li>
+          </ul> -->
+          <p class="text-muted mb-0">Already have an account? <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">Signin</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Footer Start -->
+  <div class="footer-alt py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <p class="text-white-50 font-size-15 mb-0">{{year}} © EuroEx. Design & Developed By Mangotech</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Login</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_login" (ngSubmit)="loginform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" #login_password class="form-control" id="exampleInputPassword1" placeholder="{{ 'HOME.PASSWORDPLACEHOLDER' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="login_password_toggle(login_password)">remove_red_eye</mat-icon></span>   
+          </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Login <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a></li>
+          </ul> -->
+          <p class="text-muted mb-0">New User? <a href="javascript: void(0);" class="text-primary" (click)="registerModal(registercontent)">Signup</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #registercontent let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Register</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_register" (ngSubmit)="registerform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail2" placeholder="Youremail@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">Cell</label>
+            <input type="tel" formControlName="cell"  class="form-control" id="exampleInputEmail2" placeholder="Cell" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword2">{{ 'HOME.PASSWORD' | translate }}</label>
+            <input type="password" formControlName="password" #password class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.PASSWORD' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="password_toggle(password)">remove_red_eye</mat-icon></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">{{ 'HOME.CONFIRMPASSWORD' | translate }}</label>
+            <input type="password" formControlName="cpassword" #cpassword class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="cpassword_toggle(cpassword)">remove_red_eye</mat-icon></span>
+        </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Register <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a>
+            </li>
+          </ul> -->
+          <p class="text-muted mb-0">Already have an account? <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">Signin</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>

@@ -1,0 +1,428 @@
+  <!--Navbar Start-->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-light sticky sticky-dark nav-sticky"
+    > <!-- removed id="navbar"-->
+    <div class="container">
+      <!-- LOGO -->
+      <a class="navbar-brand logo" href="/">
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        <img src="assets/images/euro-ex-logo.png" alt="" class="logo-light" height="24" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" >
+        <i class="mdi mdi-menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mx-auto navbar-center" id="mySidenav">
+          <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#home'" class="nav-link" (click)="home()">Home</a>
+          </li>
+          <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#features'" class="nav-link"
+              [ngxScrollToOffset]="5" (click)="about()">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="javascript: void(0);"  class="nav-link">Ship</a>
+            <div class="dropdown-content">
+              <a href="javascript: void(0);" class="nav-link" (click)="addShipAuth()">Create Shipment</a>
+              <a href="javascript: void(0);" class="nav-link" (click)="myShipAuth()">My Shipments</a>
+            </div>
+          </li>
+          <li class="nav-item" >
+            <a href="javascript: void(0);" class="nav-link" (click)="solutionService()">Solutions & Services</a>
+          </li>
+          <!-- <li class="nav-item" >
+            <a href="javascript: void(0);" [ngxScrollTo]="'#contact'" class="nav-link" [ngxScrollToOffset]="5">Contact
+              Us</a>
+          </li>  -->
+        </ul>
+        <div *ngIf="isLocalSotrageToken!=null;  else ElseBlock">
+          <ul class="navbar-nav navbar-center">
+            <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="logout()">Log
+                out</a>
+            </li>
+          </ul>
+        </div>
+        <ng-template #ElseBlock>
+          <ul class="navbar-nav navbar-center">
+            <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="loginModal(content)">Signin / Signup</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a href="javascript: void(0);" class="nav-link" (click)="registerModal(registercontent)">Register</a>
+            </li> -->
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+  <br><br><br>
+  <br><br><br>
+
+
+    <div id="forms" class="page-layout simple fullwidth" fxLayout="column">
+
+        <!-- HEADER -->
+        <div class="header accent p-24 h-80" fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div class="h3 mt-10" style="text-align: center;">My Profile</div>
+            </div>
+        </div>
+        <!-- / HEADER -->
+    
+        <!-- CONTENT -->
+        <div class="content p-24">
+     
+    
+    
+            <form class="mat-card mat-elevation-z4 p-24 mr-24" fxLayout="column" fxLayoutAlign="start"
+                  fxFlex="1 0 auto" name="form" [formGroup]="form" (ngSubmit)="editProfile()">
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                        <mat-label>First name</mat-label>
+                        <input matInput formControlName="FirstName" required>
+                        <mat-error>First Name is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                        <mat-label>Second name</mat-label>
+                        <input matInput formControlName="SecondName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                        <mat-label>Last name</mat-label>
+                        <input matInput formControlName="LastName" required>
+                        <mat-error>Last Name is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 50%;" class="pr-4">
+                        <mat-label>Nationality</mat-label>
+                        <input matInput formControlName="Nationality" required>
+                        <mat-error>Nationality is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 50%;" class="pr-4">
+                        <mat-label>NIC</mat-label>
+                        <input matInput formControlName="NIC" required>
+                        <mat-error>NIC is required!</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
+                        <mat-label>Phone1</mat-label>
+                        <input matInput formControlName="Phone1" required>
+                        <mat-error>Phone1 is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
+                        <mat-label>Phone2</mat-label>
+                        <input matInput formControlName="Phone2">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
+                        <mat-label>Mobile1</mat-label>
+                        <input matInput formControlName="Mobile1" required>
+                        <mat-error>Mobile1 is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
+                        <mat-label>Mobile2</mat-label>
+                        <input matInput formControlName="Mobile2">
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 50%;" class="pr-4">
+                        <mat-label>Address1</mat-label>
+                        <input matInput formControlName="Address1" required>
+                        <mat-error>Address1 is required!</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" fxFlex="50" style="width: 50%;" class="pr-4">
+                        <mat-label>Address2</mat-label>
+                        <input matInput formControlName="Address2">
+                    </mat-form-field>
+
+                </div>
+
+                <button mat-raised-button type="submit" style="background-color: #e9141b; color: white;">
+                    Save
+                </button>
+
+            </form>
+    
+            <!--Region Stepper-->
+    
+    
+        </div>
+        <!-- / CONTENT -->
+    
+    </div>
+
+
+
+  <br><br>
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Login</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_login" (ngSubmit)="loginform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+          </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Login <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a></li>
+          </ul> -->
+          <p class="text-muted mb-0">New User? <a href="javascript: void(0);" class="text-primary" (click)="registerModal(registercontent)">Signup</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #registercontent let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Register</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_register" (ngSubmit)="registerform()">
+            <div class="form-group">
+                <label for="exampleInputEmail2">{{ 'HOME.EMAIL' | translate }}</label>
+                <input type="text" formControlName="email" class="form-control" id="exampleInputEmail2" placeholder="{{ 'HOME.EMAILPLACEHOLDER' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername">{{ 'HOME.USERNAME' | translate }}</label>
+                <input type="email" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.USERNAMEPLACEHOLDER' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail2">{{ 'HOME.CELL' | translate }}</label>
+                <input type="tel" formControlName="cell"  class="form-control" id="exampleInputEmail2" placeholder="{{ 'HOME.CELL' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword2">{{ 'HOME.PASSWORD' | translate }}</label>
+                <input type="password" formControlName="password"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.PASSWORD' | translate }}" required>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword2">{{ 'HOME.CONFIRMPASSWORD' | translate }}</label>
+                <input type="password" formControlName="cpassword"  class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
+              </div>
+              <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
+              <div class="custom-control custom-checkbox">
+                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
+              </div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">{{ 'HOME.REGISTER' | translate }} <i-feather class="icon-size-15 icon ml-1"
+                    name="arrow-right-circle"></i-feather></button>
+              </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a>
+            </li>
+          </ul> -->
+          <p class="text-muted mb-0">Already have an account? <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">Signin</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <!-- Footer Start -->
+  <div class="footer-alt py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="text-center">
+            <p class="text-white-50 font-size-15 mb-0">{{year}} © EuroEx. Design & Developed By Mangotech</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End -->
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Login</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_login" (ngSubmit)="loginform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" formControlName="password" #login_password class="form-control" id="exampleInputPassword1" placeholder="{{ 'HOME.PASSWORDPLACEHOLDER' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="login_password_toggle(login_password)">remove_red_eye</mat-icon></span>   
+          </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Login <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a></li>
+          </ul> -->
+          <p class="text-muted mb-0">New User? <a href="javascript: void(0);" class="text-primary" (click)="registerModal(registercontent)">Signup</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #registercontent let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="text-center">
+        <h3 class="title mb-4">
+          <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+        </h3>
+        <h4 class="text-uppercase text-primary"><b>Register</b></h4>
+      </div>
+      <div class="login-form mt-4">
+        <form [formGroup]="user_register" (ngSubmit)="registerform()">
+          <div class="form-group">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputUsername" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail2" placeholder="Youremail@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">Cell</label>
+            <input type="tel" formControlName="cell"  class="form-control" id="exampleInputEmail2" placeholder="Cell" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword2">{{ 'HOME.PASSWORD' | translate }}</label>
+            <input type="password" formControlName="password" #password class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.PASSWORD' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="password_toggle(password)">remove_red_eye</mat-icon></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">{{ 'HOME.CONFIRMPASSWORD' | translate }}</label>
+            <input type="password" formControlName="cpassword" #cpassword class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
+            <span><mat-icon matSuffix class="secondary-text" (click)="cpassword_toggle(cpassword)">remove_red_eye</mat-icon></span>
+        </div>
+          <a href="javascript: void(0);" class="float-right text-muted font-size-15">Forgot Password.?</a>
+          <div class="custom-control custom-checkbox">
+            <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Register <i-feather class="icon-size-15 icon ml-1"
+                name="arrow-right-circle"></i-feather></button>
+          </div>
+        </form>
+        <!-- <div class="position-relative text-center mt-4">
+          <span class="login-border"></span>
+          <p class="social-login text-muted font-size-17">Social Login</p>
+        </div> -->
+        <div class="text-center">
+          <!-- <ul class="list-inline mt-2 mb-3">
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-primary">
+                <i-feather class="icon-xs" name="facebook"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-info">
+                <i-feather class="icon-xs" name="twitter"></i-feather>
+              </a></li>
+            <li class="list-inline-item mr-3"><a href="javascript: void(0);" class="login-social-icon icon-danger">
+                <i-feather class="icon-xs" name="instagram"></i-feather>
+              </a></li>
+            <li class="list-inline-item"><a href="javascript: void(0);" class="login-social-icon icon-success">
+                <i-feather class="icon-xs" name="linkedin"></i-feather>
+              </a>
+            </li>
+          </ul> -->
+          <p class="text-muted mb-0">Already have an account? <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">Signin</a></p>
+        </div>
+      </div>
+    </div>
+  </ng-template>

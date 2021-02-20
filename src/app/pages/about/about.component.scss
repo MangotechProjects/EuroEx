@@ -1,0 +1,73 @@
+.footer-alt 
+{
+  background: #23222f;
+  padding: 70px 0 40px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+  //position: fixed;
+  /* height: 50px; */
+  }
+
+  .content 
+  {
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .card-header
+  {
+    font-size: 20px;
+    color: white;
+    background-color: #e9131c;
+  }
+
+  .font-size
+  {
+    font-size: 15px;
+  }
+
+  .heading
+  {
+    background-color: #e9131c;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 2px 0 2px 0;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 190px;
+    //box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+
+  .mat-icon { 
+    float: right;
+    margin-top: -32px;
+    margin-right: 5px;
+    cursor: context-menu;
+  }
