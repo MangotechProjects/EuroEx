@@ -260,6 +260,12 @@ export class EuroExService {
 
   }
 
+  NotificationAPI(){
+    var Data = [{MsgType:"Chat Notification",Message:"You Have Received New Message!",TypeID:2}];
+    var reqHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpResp.post(this.rootUrlLocal + '/api/Custom/SendNotification', Data[0], { headers: reqHeaders });
+  }
+
   GetClientMsgsConnectionIDWise(ID){
     return this.httpResp.get(this.rootUrlLocal + '/api/Custom/GetClientMsgsForServer?ConnectionID='+ID);
   }

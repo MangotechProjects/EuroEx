@@ -407,7 +407,14 @@ export class IndexComponent implements OnInit {
           //console.log(result.Data)
           
           if(result.Data!=null){
-           // this.ConnectionID = result.Data[0].ConnectionID;
+          
+            this.EuroEx.NotificationAPI().subscribe((result: any) => {
+            
+            }, (error: HttpErrorResponse) => {
+              console.log(error);
+            });
+          
+            // this.ConnectionID = result.Data[0].ConnectionID;
             $(".chat-logs").html('');
             result.Data[0].Msgs.forEach(element => {
 
@@ -419,14 +426,12 @@ export class IndexComponent implements OnInit {
               }
              
             });
-
           }
         }
         else {
-          this.ConnectionID = 0;
-          alert("Some error occured");
+            this.ConnectionID = 0;
+            alert("Some error occured");
         }
-  
       }, (error: HttpErrorResponse) => {
         //console.log(error);
       });
