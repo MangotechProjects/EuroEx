@@ -157,6 +157,32 @@
 
                 </div>
 
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                  <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                    <mat-label>Country*</mat-label>
+                    <mat-select id="CountryDDID" formControlName="CountryDDID" [(ngModel)]="CountryDDID" required>
+                        <mat-option *ngFor="let item of CountryData" [value]="item.Value">
+                            {{item.Name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>Country is required!</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                      <mat-label>City*</mat-label>
+                      <input matInput id="City" formControlName="City" required>
+          
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" fxFlex="50" style="width: 33.33%;" class="pr-4">
+                      <mat-label>Postal Code*</mat-label>
+                      <input matInput id="PostalCode" formControlName="PostalCode" required>
+                      <mat-error>Postal Code is required!</mat-error>
+                  </mat-form-field>
+
+              </div>
+
                 <button mat-raised-button type="submit" style="background-color: #e9141b; color: white;">
                     Save
                 </button>

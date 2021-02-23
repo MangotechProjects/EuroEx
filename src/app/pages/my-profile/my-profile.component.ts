@@ -25,6 +25,8 @@ export class MyProfileComponent implements OnInit {
   form: FormGroup;
   user_login: FormGroup;
   user_register: FormGroup;
+  CountryData = [];
+  CountryDDID: number;
   currentSection = 'home';
   isLocalSotrage: any;
   isLocalSotrageToken : any;
@@ -65,6 +67,7 @@ export class MyProfileComponent implements OnInit {
     this.getoken();
 
     this.getUserData();
+    this.getCountries();
     
     this.form = this._formBuilder.group({
       FirstName: ['', Validators.required],
@@ -78,6 +81,9 @@ export class MyProfileComponent implements OnInit {
       Mobile2: [''],
       Address1: ['', Validators.required],
       Address2: [''],
+      CountryDDID: ['', Validators.required],
+      City: ['', Validators.required],
+      PostalCode: ['', Validators.required],
     });
   
   }
@@ -307,6 +313,9 @@ export class MyProfileComponent implements OnInit {
     var mobile2 = this.form.value['Mobile2'];
     var address1 = this.form.value['Address1'];
     var address2 = this.form.value['Address2'];
+    var City = this.form.value['City'];
+    var CountryID = this.form.value['CountryDDID'];
+    var PostalCode = this.form.value['PostalCode'];
 
     //console.log(this.form.value['FirstName']);
     // console.log(this.form.value['SecondName']);
@@ -322,7 +331,7 @@ export class MyProfileComponent implements OnInit {
 
     if(firstName != '' && lastName != '' && nationality != '' && nic != '' && phone1 != '' && mobile1 != '' && address1 != '')
     {
-      this.EuroEX.UpdateUserProfile(firstName,secondName,lastName,nationality,nic,phone1,phone2,mobile1,mobile2,address1,address2).subscribe((result: any) => { 
+      this.EuroEX.UpdateUserProfile(firstName,secondName,lastName,nationality,nic,phone1,phone2,mobile1,mobile2,address1,address2,City,CountryID,PostalCode).subscribe((result: any) => { 
         if(result.ResponseCode == 200 && result.Status == true)
         {
           Swal.fire('', result.Message, 'success');
@@ -349,9 +358,27 @@ export class MyProfileComponent implements OnInit {
         this.form.controls['Mobile2'].setValue(result.Data.Mobile2);
         this.form.controls['Address1'].setValue(result.Data.Address1);
         this.form.controls['Address2'].setValue(result.Data.Address2);
+        this.form.controls['City'].setValue(result.Data.City);
+        this.form.controls['PostalCode'].setValue(result.Data.PostalCode);
+        this.CountryDDID = result.Data.CountryID;
       }
     }, (error: HttpErrorResponse) => {
       Swal.fire('', 'Something went wrong', 'error');
+    });
+  }
+
+  getCountries() {
+    this.EuroEX.GetCountries().subscribe((result: any) => {
+      // // console.log(result);
+      if (result.ResponseCode == 200 && result.Status == true) {
+        this.CountryData = result.Data;
+      }
+      else {
+        Swal.fire('Error', "Some error occured", 'error');
+      }
+
+    }, (error: HttpErrorResponse) => {
+      // // console.log(error);
     });
   }
 }

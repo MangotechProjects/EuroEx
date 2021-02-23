@@ -1628,4 +1628,45 @@ ChangeShipmentTypeStatus(){
   {
     login_password.type = login_password.type === 'password' ? 'text' : 'password';
   }
+
+  SetSenderReceiversChangeCountry(id) {
+    if (id == 1)//Set Sender Country Code Wise
+    {
+      var SCountry = this.horizontalStepperStepSenderDetails.value['SenderPhoneCodeDDID'];
+      if (SCountry != '') {
+        this.SenderCountryDDID = SCountry;
+        this.SenderPhoneCodeDDID = SCountry;
+      }
+
+
+    }
+    else if (id == 2)//Set Sender Code Country Wise
+    {
+      var SCountry = this.horizontalStepperStepSenderDetails.value['SenderCountryDDID'];
+      if (SCountry != '') {
+        this.SenderCountryDDID = SCountry;
+        this.SenderPhoneCodeDDID = SCountry;
+      }
+
+    }
+    else if (id == 3)//Set Receiver Country Code Wise
+    {
+      var RCountry = this.horizontalStepperStepReceiverDetails.value['ReceiverPhoneCodeDDID'];
+      if (RCountry != '') {
+        this.ReceiverCountryDDID = RCountry;
+        this.ReceiverPhoneCodeDDID = RCountry;
+      }
+
+    }
+    else if (id == 4)// Set Receiver Code Country Wise
+    {
+      var RCountry = this.horizontalStepperStepReceiverDetails.value['ReceiverCountryDDID'];
+      if (RCountry != '') {
+        this.ReceiverCountryDDID = RCountry;
+        this.ReceiverPhoneCodeDDID = RCountry;
+      }
+
+    }
+
+  }
 }

@@ -126,25 +126,6 @@
     
                             <div fxFlex="1 0 auto" fxLayout="column">
     
-    
-                                <!-- <div *ngIf="IsNewSender else elseSenderBlock" fxLayout="row" fxLayoutAlign="start center"
-                                    fxFlex="1 0 auto">
-    
-                                    <mat-form-field appearance="outline" fxFlex="50" class="pr-4">
-                                        <mat-label>First name</mat-label>
-                                        <input matInput formControlName="SenderFirstName">
-                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                                        <mat-error>First Name is required!</mat-error>
-                                    </mat-form-field>
-    
-                                    <mat-form-field appearance="outline" fxFlex="50" class="pl-4">
-                                        <mat-label>Last name</mat-label>
-                                        <input matInput formControlName="SenderLastName">
-                                        <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                                        <mat-error>Last Name is required!</mat-error>
-                                    </mat-form-field>
-    
-                                </div> -->
                                 <!-- <ng-template #elseSenderBlock> -->
                                     <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 100%;">
                                         <mat-label>Sender</mat-label>
@@ -154,27 +135,12 @@
                                                 {{item.Name}}
                                             </mat-option>
                                         </mat-select>
-                                        <!-- <mat-select id="ExistSenderDDID" formControlName="ExistSenderDDID"
-                                            [(ngModel)]="ExistSenderDDID" (ngModelChange)="GetSenderIDWise()">
-                                            <mat-option value="2018" >
-                                                {{ isnumber }}
-                                            </mat-option>
-                                        </mat-select> -->
+
                                         <mat-error>Sender is required!</mat-error>
                                     </mat-form-field>
                                 <!-- </ng-template> -->
     
                                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                                    <!-- <mat-form-field appearance="outline" fxFlex="30" class="pr-4">
-                                        <mat-label>Code</mat-label>
-                                        <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderPhoneCodeDDID" formControlName="SenderPhoneCodeDDID"
-                                            [(ngModel)]="SenderPhoneCodeDDID" >
-                                            <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
-                                                {{item.Name}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <mat-error>Code is required!</mat-error>
-                                    </mat-form-field> -->
 
                                     <mat-form-field appearance="outline"  appearance="outline" fxFlex="30" class="pr-4"  style="width: 25%;">
                                         <mat-label>Email</mat-label>
@@ -197,32 +163,11 @@
                                     </mat-form-field>
                                 </div>
 
-                                <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Email</mat-label>
-                                        <input matInput #SenderEmail 
-                                               formControlName="SenderEmail"  required>
-                                        <mat-error>Email is required!</mat-error>
-                                    </mat-form-field>
-                
-                                </div>
-                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                
-                                    <mat-form-field appearance="outline" fxFlex="100">
-                                        <mat-label>Address</mat-label>
-                                        <textarea matInput formControlName="SenderAddress" placeholder="Flat/Office/House/Road/Street/Block/Area" placeholder="Flat/Office/House/Road/Street/Block/Area" required>
-                                            
-                                        </textarea>
-                                        <mat-error>Address is required!</mat-error>
-                                    </mat-form-field>
-                                </div> -->
-
                                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
                                     <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
                                         <mat-label>Code</mat-label>
                                         <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderPhoneCodeDDID" formControlName="SenderPhoneCodeDDID"
-                                            [(ngModel)]="SenderPhoneCodeDDID" >
+                                            [(ngModel)]="SenderPhoneCodeDDID"  (focusout)="SetSenderReceiversChangeCountry(1)">
                                             <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
                                                 {{item.Name}}
                                             </mat-option>
@@ -232,7 +177,7 @@
                                     <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
                                         <mat-label>Country</mat-label>
                                         <mat-select [disabled] = "IsCountryAndCodeDisabled" id="SenderCountryDDID" formControlName="SenderCountryDDID"
-                                            [(ngModel)]="SenderCountryDDID" >
+                                            [(ngModel)]="SenderCountryDDID"  (focusout)="SetSenderReceiversChangeCountry(2)">
                                             <!-- <mat-option value="default">Select Type</mat-option> -->
                                             <mat-option *ngFor="let item of CountryData" [value]="item.Value">
                                                 {{item.Name}}
@@ -245,14 +190,7 @@
                                         <input matInput formControlName="SenderCity" required>
                                         <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
                                         <mat-error>City is required!</mat-error>
-                                    </mat-form-field>
-    
-                                    <!-- <mat-form-field appearance="outline" fxFlex="34" class="px-8">
-                                        <mat-label>Country</mat-label>
-                                        <input matInput formControlName="SenderCountry" required>
-                                        <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
-                                        <mat-error>Country is required!</mat-error>
-                                    </mat-form-field> -->
+                                    </mat-form-field>   
     
                                     <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
                                         <mat-label>Postal Code</mat-label>
@@ -383,7 +321,7 @@
                                     <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
                                         <mat-label>Code</mat-label>
                                         <mat-select [disabled] = "IsCountryAndCodeDisabled" id="ReceiverPhoneCodeDDID" formControlName="ReceiverPhoneCodeDDID"
-                                            [(ngModel)]="ReceiverPhoneCodeDDID" >
+                                            [(ngModel)]="ReceiverPhoneCodeDDID" (focusout)="SetSenderReceiversChangeCountry(3)" >
                                             <!-- <mat-option value="default">Select Type</mat-option> -->
                                             <mat-option *ngFor="let item of PhoneCodeData" [value]="item.Value">
                                                 {{item.Name}}
@@ -395,7 +333,7 @@
                                     <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
                                         <mat-label>Country</mat-label>
                                         <mat-select [disabled] = "IsCountryAndCodeDisabled" id="ReceiverCountryDDID" formControlName="ReceiverCountryDDID"
-                                            [(ngModel)]="ReceiverCountryDDID" >
+                                            [(ngModel)]="ReceiverCountryDDID" (focusout)="SetSenderReceiversChangeCountry(4)" >
                                             <!-- <mat-option value="default">Select Type</mat-option> -->
     
     

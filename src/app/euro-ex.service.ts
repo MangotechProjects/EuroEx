@@ -271,13 +271,13 @@ export class EuroExService {
     return this.httpResp.get(this.rootUrlLocal + '/api/Custom/GetUserProfileInfo?UserID=' + Data, { headers: reqHeaders })
   }
 
-  UpdateUserProfile(firstName,secondName,lastName,nationality,nic,phone1,phone2,mobile1,mobile2,address1,address2)
+  UpdateUserProfile(firstName,secondName,lastName,nationality,nic,phone1,phone2,mobile1,mobile2,address1,address2,City,CountryID,PostalCode)
   {
     var Data = [{
       UserID: localStorage.getItem("UserID"),
       FirstName: firstName, SecondName: secondName, LastName: lastName, Nationality: nationality,
       NIC: nic, Phone1: phone1, Phone2: phone2, Mobile1: mobile1, Mobile2: mobile2, Address1: address1,
-      Address2: address2
+      Address2: address2,TypeID:1,City:City,CountryID:CountryID,PostalCode:PostalCode
     }];
 
     //console.log(Data[0]);
