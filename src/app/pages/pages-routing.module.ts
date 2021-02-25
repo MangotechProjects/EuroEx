@@ -13,6 +13,7 @@ import { AuthGuardService as AuthGuard } from 'src/app/auth/auth-guard.service';
 import { SolutionServiceComponent } from './solution-service/solution-service.component';
 import { FaqComponent } from './faq/faq.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
     {
@@ -66,6 +67,10 @@ const routes: Routes = [
     {
         path: 'my-profile',
         component: MyProfileComponent
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent
     },
     
 ];

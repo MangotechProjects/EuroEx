@@ -381,4 +381,9 @@ export class MyProfileComponent implements OnInit {
       // // console.log(error);
     });
   }
+
+  myprofile()
+  {
+    this.router.navigate(['my-profile']);
+  }
 }

@@ -38,8 +38,11 @@
         <div *ngIf="isLocalSotrageToken!=null;  else ElseBlock">
           <ul class="navbar-nav navbar-center">
             <li class="nav-item">
-              <a href="javascript: void(0);" class="nav-link" (click)="logout()">Log
+              <a href="javascript: void(0);" class="nav-link" (click)="logout()">Sign
                 out</a>
+            </li>
+            <li class="nav-item">
+                <a href="javascript: void(0);" class="nav-link" (click)="myprofile()">My Profile</a>
             </li>
           </ul>
         </div>
@@ -110,7 +113,7 @@
 
                     <mat-form-field appearance="outline" fxFlex="50" style="width: 50%;" class="pr-4">
                         <mat-label>NIC</mat-label>
-                        <input matInput formControlName="NIC" required>
+                        <input matInput formControlName="NIC" required type="number">
                         <mat-error>NIC is required!</mat-error>
                     </mat-form-field>
 
@@ -120,24 +123,24 @@
 
                     <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
                         <mat-label>Phone1</mat-label>
-                        <input matInput formControlName="Phone1" required>
+                        <input matInput formControlName="Phone1" type="number" required>
                         <mat-error>Phone1 is required!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
                         <mat-label>Phone2</mat-label>
-                        <input matInput formControlName="Phone2">
+                        <input matInput formControlName="Phone2" type="number"> 
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
                         <mat-label>Mobile1</mat-label>
-                        <input matInput formControlName="Mobile1" required>
+                        <input matInput formControlName="Mobile1" required type="number">
                         <mat-error>Mobile1 is required!</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" fxFlex="50" style="width: 25%;" class="pr-4">
                         <mat-label>Mobile2</mat-label>
-                        <input matInput formControlName="Mobile2">
+                        <input matInput formControlName="Mobile2" type="number">
                     </mat-form-field>
 
                 </div>

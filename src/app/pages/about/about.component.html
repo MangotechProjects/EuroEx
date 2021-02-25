@@ -167,11 +167,12 @@
                 <input type="password" formControlName="password" #login_password class="form-control" id="exampleInputPassword1" placeholder="{{ 'HOME.PASSWORDPLACEHOLDER' | translate }}" required>
                 <span><mat-icon matSuffix class="secondary-text" (click)="login_password_toggle(login_password)">remove_red_eye</mat-icon></span>
               </div>
-              <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
-              <div class="custom-control custom-checkbox">
-                <!-- <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label> -->
-              </div>
+              <a href="javascript: void(0);" class="float-right text-primary font-size-15" (click)="forgotPasswordModal(forgotpasswordcontent)">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
+              <!-- <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label font-size-15" for="customCheck1">Remember Me</label>
+              </div> -->
+              <br>
               <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">{{ 'HOME.LOGIN' | translate }} <i-feather class="icon-size-15 icon ml-1"
                     name="arrow-right-circle"></i-feather></button>
@@ -234,11 +235,6 @@
                 <input type="password" formControlName="cpassword" #cpassword class="form-control" id="exampleInputPassword2" placeholder="{{ 'HOME.CONFIRMPASSWORD' | translate }}" required>
                 <span><mat-icon matSuffix class="secondary-text" (click)="cpassword_toggle(cpassword)">remove_red_eye</mat-icon></span>
               </div>                
-              <a href="javascript: void(0);" class="float-right text-muted font-size-15">{{ 'HOME.FORGOTPASSWORD' | translate }}</a>
-              <div class="custom-control custom-checkbox">
-                <!-- <input type="checkbox" class="custom-control-input" id="customCheck2">
-                <label class="custom-control-label font-size-15" for="customCheck2">Remember Me</label> -->
-              </div>
               <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">{{ 'HOME.REGISTER' | translate }} <i-feather class="icon-size-15 icon ml-1"
                     name="arrow-right-circle"></i-feather></button>
@@ -265,6 +261,34 @@
                 </li>
               </ul> -->
               <p class="text-muted mb-0">{{ 'HOME.ALREDYHAVEANACCOUNT' | translate }} <a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">{{ 'HOME.SIGNIN' | translate }}</a></p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #forgotpasswordcontent let-c="close" let-d="dismiss">
+        <div class="modal-body">
+          <div class="text-center">
+            <h3 class="title mb-4">
+              <img src="assets/images/euro-ex-logo.png" alt="" class="logo-dark" height="24" />
+            </h3> 
+            <h4 class="text-uppercase text-primary"><b>{{ 'HOME.FORGOTPASSWORDHEADING' | translate }}</b></h4>
+          </div>
+          <div class="login-form mt-4">
+            <form [formGroup]="forgotPasswordForm" (ngSubmit)="forogotpasswordform()">
+              <div class="form-group">
+                <label for="exampleInputUsername">{{ 'HOME.USERNAME' | translate }}</label>
+                <input type="email" formControlName="useremail" class="form-control" id="exampleInputUsername" placeholder="{{ 'HOME.USERNAMEPLACEHOLDER' | translate }}" required>
+              </div>
+              <div class="custom-control custom-checkbox">
+              </div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">{{ 'HOME.SENDRESETLINK' | translate }} <i-feather class="icon-size-15 icon ml-1"
+                    name="arrow-right-circle"></i-feather></button>
+              </div>
+            </form>
+            <div class="text-center">
+              <p class="text-muted mb-0"><a href="javascript: void(0);" class="text-primary" (click)="loginModal(content)">{{ 'HOME.GOBACKTOLOGIN' | translate }} </a></p>
             </div>
           </div>
         </div>

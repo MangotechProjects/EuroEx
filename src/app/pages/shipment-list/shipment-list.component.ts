@@ -308,6 +308,11 @@ export class ShipmentListComponent implements OnInit
   {
     login_password.type = login_password.type === 'password' ? 'text' : 'password';
   }
+
+  myprofile()
+  {
+    this.router.navigate(['my-profile']);
+  }
 }
 
 export interface ShipmentDataList {

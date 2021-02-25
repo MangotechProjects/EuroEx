@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 export class FaqComponent implements OnInit {
   user_login: FormGroup;
   user_register: FormGroup;
+  forgotPasswordForm: FormGroup;
   isLocalSotrageUserName : any;
   isLocalSotrageToken : any;
   isLocalSotrageAccID : any;
@@ -50,6 +51,10 @@ export class FaqComponent implements OnInit {
       cpassword: ['', Validators.required]
     });
 
+    this.forgotPasswordForm = this._formBuilder.group({
+      useremail: ['', [Validators.required, Validators.email]]
+    });
+
     this.getoken();
   }
  
@@ -68,6 +73,15 @@ export class FaqComponent implements OnInit {
   registerModal(registercontent) {
     this.closeModal();
     this.modalService.open(registercontent, { centered: true });
+  }
+
+  /**
+   * Register modal
+   * @param registercontent content
+   */
+  forgotPasswordModal(forgotpasswordcontent) {
+    this.closeModal();
+    this.modalService.open(forgotpasswordcontent, { centered: true });
   }
 
   //logout
@@ -246,6 +260,37 @@ export class FaqComponent implements OnInit {
   login_password_toggle(login_password: any): any 
   {
     login_password.type = login_password.type === 'password' ? 'text' : 'password';
+  }
+
+  forogotpasswordform() {
+        
+    var Email = this.forgotPasswordForm.value["useremail"];
+
+    if (Email != null) {
+        this.EuroEx.SendForgotPasswordOTPRequest(Email).subscribe((result: any) => {
+          
+            if (result.ResponseCode == 200 && result.Status == true) {
+               //console.log(result.Data)
+                if(result.Data[0].code!=null){
+
+                    localStorage.setItem("PasswordResetCode",result.Data[0].code);
+                    Swal.fire('Sent', "Password Reset Link Sent To Email", 'success');
+               
+                }
+                else {
+                    Swal.fire('Error', "Some error occured. Code Not Generated", 'error');
+                  }
+             
+            }
+            else {
+              //console.log(result.Data)
+              Swal.fire('Error', "Some error occured", 'error');
+            }
+      
+          }, (error: HttpErrorResponse) => {
+          
+          });
+    }
   }
 
 }

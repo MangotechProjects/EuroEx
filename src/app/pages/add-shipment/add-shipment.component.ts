@@ -1669,4 +1669,9 @@ ChangeShipmentTypeStatus(){
     }
 
   }
+
+  myprofile()
+  {
+    this.router.navigate(['my-profile']);
+  }
 }

@@ -38,6 +38,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { LivechatWidgetModule } from '@livechat/angular-widget';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -48,7 +49,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
 @NgModule({
-  declarations: [IndexComponent, Index2Component, Index3Component, Index4Component, Index5Component, Index6Component, AddShipmentComponent, ShipmentListComponent, AboutComponent, FaqComponent, DialogDataExampleDialog, SolutionServiceComponent, MyProfileComponent],
+  declarations: [IndexComponent, Index2Component, Index3Component, Index4Component, Index5Component, Index6Component, AddShipmentComponent, ShipmentListComponent, AboutComponent, FaqComponent, DialogDataExampleDialog, SolutionServiceComponent, MyProfileComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

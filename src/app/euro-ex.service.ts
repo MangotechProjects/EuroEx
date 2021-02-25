@@ -8,6 +8,7 @@ export class EuroExService {
 
   constructor(private httpResp: HttpClient) { }
   rootUrlLocal = 'https://api.euroex.com';
+  webSiteBaseUrl = 'https://euroex.com/#/reset-password';
   
   email(name,email,msg)
   {
@@ -290,5 +291,25 @@ export class EuroExService {
       
     var reqHeaders = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'bearer ' + localStorage.getItem("token") });
     return this.httpResp.post(this.rootUrlLocal + '/api/Custom/EditUserProfileInfo', Data[0], { headers: reqHeaders });
+  }
+
+  SendForgotPasswordOTPRequest(Email) {
+
+    var Data = [{ Email: Email, BaseUrl: this.webSiteBaseUrl, PlatformID: 1 }]
+
+    var reqHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpResp.post(this.rootUrlLocal + '/api/Account/ForgotPassword', Data[0], { headers: reqHeaders });
+
+  }
+
+  ResetPasswordRequest(Data) {
+    //console.log(Data[0])
+    var reqHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpResp.post(this.rootUrlLocal + '/api/Account/ResetPassword', Data[0], { headers: reqHeaders });
+
+  }
+
+  GetCurrencyList(){
+    return this.httpResp.get(this.rootUrlLocal + '/api/Custom/CurrencyList');
   }
 }
