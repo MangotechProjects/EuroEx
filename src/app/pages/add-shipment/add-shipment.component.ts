@@ -961,7 +961,7 @@ ChangeShipmentTypeStatus(){
       var perKGRate = $("#perKGRate").val();
       this.perKGRateGlobal = perKGRate as number;
       var weight = this.docWeight;
-      var rate = this.perKGRateGlobal * weight;
+      var rate = (this.perKGRateGlobal * weight).toFixed(3);
 
       if(this.appendDocData.length>0){
         this.appendDocData.forEach(element => {
@@ -978,7 +978,7 @@ ChangeShipmentTypeStatus(){
       this.TotalUnits +=1 ;//this.appendDocData.length;
      // console.log(this.appendDocData);
       //alert("in doc length"+this.TotalUnits);
-      this.TotalChargeAm += rate;
+      this.TotalChargeAm += parseFloat(rate);
       this.TotalWeight += weight;
       this.resetFileds();
     }
@@ -1002,7 +1002,7 @@ ChangeShipmentTypeStatus(){
       var FinalDocWeight = $row.find("#docWeightTable").text();
       //var FInalTotalUnit =  $row.find("#docWeightTable").text();
         length++;
-      am += parseInt(TotalAm) ;
+      am += parseFloat(TotalAm) ;
       dw += parseInt(FinalDocWeight);
     });
     this.TotalUnits =length;
@@ -1028,7 +1028,7 @@ ChangeShipmentTypeStatus(){
       var TotalAm = $row.find("#parcelTotalAmountTable").text();
       var FinalDocWeight = $row.find("#parcelNetWeightTable").text();
       
-      am += parseInt(TotalAm) ;
+      am += parseFloat(TotalAm) ;
       dw += parseInt(FinalDocWeight);
 
       length++;
@@ -1053,7 +1053,7 @@ ChangeShipmentTypeStatus(){
       var perKGRate = $("#perKGRate").val();
       this.perKGRateGlobal = perKGRate as number;
       var weight = this.parcelNetWeight;
-      var rate = this.perKGRateGlobal * weight;
+      var rate = ( this.perKGRateGlobal * weight ).toFixed(3);
 
       if(this.appendParcelData.length>0){
         this.appendParcelData.forEach(element => {
@@ -1071,7 +1071,7 @@ ChangeShipmentTypeStatus(){
       this.TotalUnits +=1 ;//this.appendDocData.length;
       // console.log(this.appendDocData);
       // alert("in parcel length"+this.TotalUnits);
-      this.TotalChargeAm += rate;
+      this.TotalChargeAm += parseFloat(rate);
       this.TotalWeight += weight;
       this.resetFileds();
     }
