@@ -35,6 +35,11 @@
               Us</a>
           </li>  -->
       </ul>
+
+      <select [(ngModel)]="currencyID" (ngModelChange)="currencyChanged($event)" name="data">
+        <option *ngFor="let curr of currencyArray" [value]="curr.ID">{{ curr.Symbol }}</option>
+      </select>
+
       <div *ngIf="isLocalSotrageToken!=null;  else ElseBlock">
         <ul class="navbar-nav navbar-center">
           <li class="nav-item">
@@ -182,7 +187,7 @@
 
         <td>{{ShipmentDataList.TotalWeight}}</td>
         <td>{{ShipmentDataList.TotalCBMWeight}}</td>
-        <td>{{ShipmentDataList.TotalAmount}}</td>
+        <td>{{ShipmentDataList.TotalAmount / ExchangeRate }}</td>
         <td *ngIf="ShipmentDataList.ContainerName!=null else ElseBlockContainer">{{ShipmentDataList.ContainerName}}</td>
         <ng-template #ElseBlockContainer>
           <td>Nil</td>

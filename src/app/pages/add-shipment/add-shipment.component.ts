@@ -33,6 +33,11 @@ export class AddShipmentComponent implements OnInit {
   isLocalStorageUserID: any;
   registrationDate: any;
   Date = new Date();
+
+  currencyID: number;
+  currencyArray: any;
+  ExchangeRate: any;
+  Symbol: string;
  
   voucherName: string;
   year: number = new Date().getFullYear();
@@ -88,6 +93,8 @@ export class AddShipmentComponent implements OnInit {
     this.GetSenderIDWise();
 
     this.getoken();
+
+    this.getCurrencyList();
     
     // this.isLocalSotrageSenderID = localStorage.getItem("SenderID") as number;
     // console.log(this.isLocalSotrageSenderID)
@@ -876,15 +883,15 @@ ChangeShipmentTypeStatus(){
       this.EuroEX.GetPerKGRateShipmentWiseForShipment(ShipmentTypeID, UnitID, FromCountryID, ToCountryID).subscribe((result: any) => {
         //console.log(result);
         if (result.ResponseCode == 200 && result.Status == true) {
-          $("#perKGRate").val(result.Data);
+          $("#perKGRate").val((result.Data / this.ExchangeRate).toFixed(3));
         }
         else if (result.ResponseCode == 201 && result.Status == true) {
           //alert(result.Message);
           Swal.fire('',result.Message, 'success')
-          $("#perKGRate").val(result.Data);
+          $("#perKGRate").val((result.Data / this.ExchangeRate).toFixed(3));
         }
         else {
-          $("#perKGRate").val(1);
+          $("#perKGRate").val((1 / this.ExchangeRate).toFixed(3));
           //alert("Some error occured");
           Swal.fire('','Some error occured', 'error')
         }
@@ -1083,7 +1090,7 @@ ChangeShipmentTypeStatus(){
     var PayModeDDID = this.horizontalStepperStep4.value['PayModeDDID'];
     var packageTypeDDID = this.horizontalStepperStep3.value['packageTypeDDID'];
     var cargoTypeDDID = this.horizontalStepperStep1.value['CargoTypeDDID'];
-    var RatePerItem = this.perKGRateGlobal;
+    var RatePerItem = (this.perKGRateGlobal * parseFloat(this.ExchangeRate)); console.log(RatePerItem);
 
     var SName = this.horizontalStepperStepSenderDetails.value['SenderFirstName'] + ' ' + this.horizontalStepperStepSenderDetails.value['SenderLastName'];
     var SPhoneNumber = this.horizontalStepperStepSenderDetails.value['SenderPhone'];
@@ -1673,5 +1680,43 @@ ChangeShipmentTypeStatus(){
   myprofile()
   {
     this.router.navigate(['my-profile']);
+  }
+
+  getCurrencyList(){
+
+    this.EuroEX.GetCurrencyList().subscribe((result: any) => {
+          
+      if (result.ResponseCode == 200 && result.Status == true) { 
+        this.currencyArray = result.Data;
+
+        result.Data.forEach(e => {
+            if(e.ID == 2){
+              this.currencyID = e.ID;
+              this.ExchangeRate = e.ExchangeRate;
+              this.Symbol = e.Symbol;
+            }
+        });
+
+      }
+      else{
+        //console.log()
+      }
+    }, (error: HttpErrorResponse) => {
+          
+    });
+
+  }
+
+  currencyChanged(cid) {
+
+    this.currencyArray.forEach(e => {
+      
+      if(e.ID == cid){
+        this.ExchangeRate = e.ExchangeRate;
+        this.Symbol = e.Symbol;
+      }
+
+    });
+
   }
 }

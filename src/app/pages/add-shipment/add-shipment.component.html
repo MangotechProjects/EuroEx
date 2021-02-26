@@ -35,6 +35,11 @@
               Us</a>
           </li>  -->
         </ul>
+
+        <select [(ngModel)]="currencyID" (ngModelChange)="currencyChanged($event)" name="data">
+            <option *ngFor="let curr of currencyArray" [value]="curr.ID">{{ curr.Symbol }}</option>
+        </select>
+
         <div *ngIf="isLocalSotrageToken!=null;  else ElseBlock">
           <ul class="navbar-nav navbar-center">
             <li class="nav-item">
@@ -197,7 +202,7 @@
     
                                     <mat-form-field appearance="outline" fxFlex="30" class="pr-4" style="width: 25%;">
                                         <mat-label>Postal Code</mat-label>
-                                        <input matInput #SenderPostalCode value="94043" formControlName="SenderPostalCode"
+                                        <input matInput #SenderPostalCode value="" formControlName="SenderPostalCode"
                                             placeholder="Postal/PO Box"  required>
                                         <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
                                         <!-- <mat-hint align="end">{{SenderPostalCode.value.length}} / 5</mat-hint> -->
@@ -363,10 +368,9 @@
     
                                     <mat-form-field appearance="outline" class="pr-4" style="width: 25%;">
                                         <mat-label>Postal Code</mat-label>
-                                        <input matInput #postalCode value="94043" formControlName="ReceiverPostalCode"
-                                        placeholder="Postal/PO Box" maxlength="5" required>
+                                        <input matInput #postalCode value="" formControlName="ReceiverPostalCode"
+                                        placeholder="Postal/PO Box"  required>
                                         <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
-                                        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                                         <mat-error>Postal Code is required!</mat-error>
                                     </mat-form-field>
     

@@ -56,6 +56,11 @@ export class ShipmentListComponent implements OnInit
   dataSource : any[] = [];
   year: number = new Date().getFullYear();
 
+  currencyID: number;
+  currencyArray: any;
+  ExchangeRate: any;
+  Symbol: string;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -86,6 +91,7 @@ export class ShipmentListComponent implements OnInit
 
     this.getoken();
     this.getShipmentOrdersList();
+    this.getCurrencyList();
   }
 
   // ngAfterViewInit() {
@@ -312,6 +318,44 @@ export class ShipmentListComponent implements OnInit
   myprofile()
   {
     this.router.navigate(['my-profile']);
+  }
+
+  getCurrencyList(){
+
+    this.EuroEx.GetCurrencyList().subscribe((result: any) => {
+          
+      if (result.ResponseCode == 200 && result.Status == true) { 
+        this.currencyArray = result.Data;
+
+        result.Data.forEach(e => {
+            if(e.ID == 2){
+              this.currencyID = e.ID;
+              this.ExchangeRate = e.ExchangeRate;
+              this.Symbol = e.Symbol;
+            }
+        });
+
+      }
+      else{
+        //console.log()
+      }
+    }, (error: HttpErrorResponse) => {
+          
+    });
+
+  }
+
+  currencyChanged(cid) {
+
+    this.currencyArray.forEach(e => {
+      
+      if(e.ID == cid){
+        this.ExchangeRate = e.ExchangeRate;
+        this.Symbol = e.Symbol;
+      }
+
+    });
+
   }
 }
 

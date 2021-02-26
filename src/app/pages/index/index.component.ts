@@ -39,6 +39,9 @@ export class IndexComponent implements OnInit {
   isLocalStorageUserID: any;
   msg : any;
   ConnectionID : number;
+  currencyArray: any;
+  ExchangeRate: any;
+  Symbol: string;
   // ShipmentStatus:[];
 
 
@@ -80,9 +83,10 @@ export class IndexComponent implements OnInit {
       useremail: ['', [Validators.required, Validators.email]]
     });
 
+    this.getCurrencyList();
     this.getoken();
     this.chatinit();
-    this.getCurrencyList();
+    
 
     this.getConnectionID();
     setInterval(() => {
@@ -514,7 +518,7 @@ export class IndexComponent implements OnInit {
         this.EuroEx.SendForgotPasswordOTPRequest(Email).subscribe((result: any) => {
           
             if (result.ResponseCode == 200 && result.Status == true) {
-               //console.log(result.Data)
+                //console.log(result.Data)
                 if(result.Data[0].code!=null){
 
                     localStorage.setItem("PasswordResetCode",result.Data[0].code);
@@ -542,16 +546,28 @@ export class IndexComponent implements OnInit {
     this.EuroEx.GetCurrencyList().subscribe((result: any) => {
           
       if (result.ResponseCode == 200 && result.Status == true) { 
-        console.log(result.Data)
+        this.currencyArray = result.Data;
+
+        result.Data.forEach(e => {
+            if(e.ID == 2){
+              this.ExchangeRate = e.ExchangeRate;
+              this.Symbol = e.Symbol;
+            }
+        });
+
       }
       else{
-
+        //console.log()
       }
-
+    }, (error: HttpErrorResponse) => {
+          
     });
 
   }
 
+  dataChanged(e) {
+    console.log(e)
+  }
 }
 
 @Component({
