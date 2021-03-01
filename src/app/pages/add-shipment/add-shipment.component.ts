@@ -1158,6 +1158,7 @@ ChangeShipmentTypeStatus(){
         PickUpDate: PickUpDate,
         ToTimeR: ToTime,
         FromTimeR: FromTime,
+        PayTypeID: 2,
         PackageTypeID: packageTypeDDID,
         PayModeID: PayModeDDID,
         ShipmentDetails: TableData,
@@ -1166,9 +1167,9 @@ ChangeShipmentTypeStatus(){
       });
 
       if (Data) {
-        console.log(Data[0]);
+        //console.log(Data[0]);
         this.EuroEX.submitShipment(Data).subscribe((result: any) => {
-          console.log(result);
+          //console.log(result);
           if (result.ResponseCode == 200 && result.Status == true) {
 
             //console.log("Shipment Confirmed");
@@ -1226,6 +1227,7 @@ ChangeShipmentTypeStatus(){
         ToTimeR: ToTime,
         FromTimeR: FromTime,
         CargoTypeID:cargoTypeDDID,
+        PayTypeID: 2,
         PackageTypeID: packageTypeDDID,
         PayModeID: PayModeDDID,
         ShipmentDetails: TableData,

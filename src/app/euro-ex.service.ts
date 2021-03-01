@@ -165,7 +165,7 @@ export class EuroExService {
   }
 
   submitShipment(Data) {
-    console.log(Data[0]);
+    //console.log(Data[0]);
     var auth_token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
