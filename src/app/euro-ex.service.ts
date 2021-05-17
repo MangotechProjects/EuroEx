@@ -7,8 +7,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class EuroExService {
 
   constructor(private httpResp: HttpClient) { }
-  rootUrlLocal = 'https://api.euroex.com';
-  webSiteBaseUrl = 'https://euroex.com/#/reset-password';
+  //rootUrlLocal = 'https://api.euroex.com';
+  //webSiteBaseUrl = 'https://euroex.com/#/reset-password';
+  rootUrlLocal = 'https://courierapi.mangotech-erp.com';
+  webSiteBaseUrl = 'https://courier.mangotech-erp.com/#/reset-password';
   
   email(name,email,msg)
   {
